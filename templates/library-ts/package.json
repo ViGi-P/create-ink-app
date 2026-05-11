@@ -1,0 +1,35 @@
+{
+  "name": "create-ink-app-library-ts",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Hello world Ink library",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "lint": "xo source test",
+    "test": "pnpm build && node --test test/*.test.js",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@endernoke/wax": "^1.0.0",
+    "ink": "^7.0.2",
+    "react": "^19.2.6"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.2",
+    "@types/react": "^19.2.14",
+    "ink-testing-library": "^4.0.0",
+    "typescript": "^6.0.3",
+    "xo": "^0.60.0"
+  },
+  "xo": {
+    "prettier": true,
+    "space": 2,
+    "rules": {
+      "@typescript-eslint/naming-convention": "off"
+    }
+  }
+}

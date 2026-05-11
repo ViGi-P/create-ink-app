@@ -1,0 +1,27 @@
+{
+  "name": "create-ink-app-cli-js",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Hello world Ink CLI",
+  "license": "MIT",
+  "type": "module",
+  "bin": "./bin/cli.js",
+  "scripts": {
+    "lint": "xo .",
+    "test": "node --test test/*.test.js"
+  },
+  "dependencies": {
+    "@endernoke/wax": "^1.0.0",
+    "ink": "^7.0.2",
+    "meow": "^14.1.0",
+    "react": "^19.2.6"
+  },
+  "devDependencies": {
+    "ink-testing-library": "^4.0.0",
+    "xo": "^0.60.0"
+  },
+  "xo": {
+    "prettier": true,
+    "space": 2
+  }
+}

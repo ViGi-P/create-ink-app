@@ -1,0 +1,48 @@
+{
+  "name": "@vigi-p/create-ink-app",
+  "version": "1.0.0",
+  "description": "Generate a starter Ink app",
+  "license": "MIT",
+  "type": "module",
+  "bin": "./dist/index.js",
+  "files": [
+    "dist",
+    "templates",
+    "AGENTS.md",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "lint": "xo src test",
+    "test": "pnpm build && node --test test/*.test.js",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "ink",
+    "react",
+    "cli",
+    "scaffold",
+    "template"
+  ],
+  "author": "",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "cpy": "^13.2.2",
+    "execa": "^9.6.1",
+    "make-dir": "^5.1.0",
+    "meow": "^14.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.2",
+    "typescript": "^6.0.3",
+    "xo": "^0.60.0"
+  },
+  "xo": {
+    "prettier": true,
+    "space": 2
+  },
+  "packageManager": "pnpm@11.0.9"
+}

@@ -1,0 +1,35 @@
+{
+  "name": "create-ink-app-cli-ts",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Hello world Ink CLI",
+  "license": "MIT",
+  "type": "module",
+  "bin": "./bin/cli.js",
+  "scripts": {
+    "build": "tsc",
+    "lint": "xo source test",
+    "test": "pnpm build && node --test test/*.test.js",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@endernoke/wax": "^1.0.0",
+    "ink": "^7.0.2",
+    "meow": "^14.1.0",
+    "react": "^19.2.6"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.2",
+    "@types/react": "^19.2.14",
+    "ink-testing-library": "^4.0.0",
+    "typescript": "^6.0.3",
+    "xo": "^0.60.0"
+  },
+  "xo": {
+    "prettier": true,
+    "space": 2,
+    "rules": {
+      "@typescript-eslint/naming-convention": "off"
+    }
+  }
+}
