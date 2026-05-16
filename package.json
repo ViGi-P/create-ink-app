@@ -5,6 +5,13 @@
   "license": "MIT",
   "type": "module",
   "bin": "./dist/index.js",
+  "repository": {
+    "url": "https://github.com/ViGi-P/create-ink-app",
+    "type": "git"
+  },
+  "bugs": {
+    "url": "https://github.com/ViGi-P/create-ink-app/issues"
+  },
   "files": [
     "dist",
     "templates",
