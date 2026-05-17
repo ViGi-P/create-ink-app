@@ -1,31 +1,50 @@
 {
-  "name": "create-ink-app-library-js",
+  "name": "library-js",
   "version": "0.1.0",
-  "private": true,
-  "description": "Hello world Ink library",
-  "license": "MIT",
+  "description": "Ink powered library",
   "type": "module",
   "main": "./dist/index.js",
   "scripts": {
-    "build": "node scripts/build.js",
-    "lint": "xo .",
-    "test": "pnpm build && node --test test/*.test.js"
+    "build": "babel --out-dir=dist src",
+    "dev": "babel --out-dir=dist --watch src",
+    "lint": "xo",
+    "pretest": "babel --out-dir=dist src",
+    "test": "node --test dist/__tests__/*.test.js"
   },
   "dependencies": {
-    "@endernoke/wax": "^1.0.0",
     "ink": "^7.0.2",
     "react": "^19.2.6"
   },
   "devDependencies": {
-    "cpy": "^13.2.2",
+    "@babel/cli": "^7.28.6",
+    "@babel/preset-react": "^7.28.5",
+    "eslint-config-xo-react": "^0.27.0",
     "ink-testing-library": "^4.0.0",
     "xo": "^0.60.0"
   },
   "xo": {
-    "prettier": true,
     "space": 2,
-    "ignores": [
-      "dist/**"
+    "prettier": true,
+    "extends": [
+      "xo-react"
+    ],
+    "react": true,
+    "rules": {
+      "react/prop-types": "off",
+      "react/react-in-jsx-scope": "off"
+    }
+  },
+  "babel": {
+    "plugins": [
+      "./babel-plugin-rewrite-esm-imports.cjs"
+    ],
+    "presets": [
+      [
+        "@babel/preset-react",
+        {
+          "runtime": "automatic"
+        }
+      ]
     ]
   }
 }

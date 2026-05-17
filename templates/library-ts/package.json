@@ -1,25 +1,23 @@
 {
-  "name": "create-ink-app-library-ts",
+  "name": "lib-ts",
   "version": "0.1.0",
-  "private": true,
-  "description": "Hello world Ink library",
-  "license": "MIT",
+  "description": "Ink powered library",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
+    "dev": "tsc --watch",
     "build": "tsc",
-    "lint": "xo source test",
-    "test": "pnpm build && node --test test/*.test.js",
+    "lint": "xo src",
+    "pretest": "tsc",
+    "test": "node --test dist/__tests__/*.test.js",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@endernoke/wax": "^1.0.0",
     "ink": "^7.0.2",
     "react": "^19.2.6"
   },
   "devDependencies": {
-    "@types/node": "^24.10.2",
     "@types/react": "^19.2.14",
     "ink-testing-library": "^4.0.0",
     "typescript": "^6.0.3",
@@ -27,9 +25,10 @@
   },
   "xo": {
     "prettier": true,
-    "space": 2,
+    "typescript": true,
     "rules": {
-      "@typescript-eslint/naming-convention": "off"
+      "@typescript-eslint/naming-convention": "off",
+      "n/file-extension-in-import": "off"
     }
   }
 }

@@ -1,6 +1,6 @@
 # create-ink-app 🎨
 
-> The quickest way to bootstrap your next [Ink](https://github.com/vadimdemedes/ink) project.
+> ~~The quickest 😝~~ An opinionated way to bootstrap your next [Ink](https://github.com/vadimdemedes/ink) project.
 
 Scaffold a ready-to-go Ink application with zero friction. Whether you're building a full-blown CLI or a reusable terminal library, this tool handles the boilerplate so you can focus on building beautiful terminal interfaces.
 

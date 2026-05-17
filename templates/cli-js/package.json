@@ -1,14 +1,15 @@
 {
-  "name": "create-ink-app-cli-js",
+  "name": "cli-js",
   "version": "0.1.0",
-  "private": true,
   "description": "Hello world Ink CLI",
-  "license": "MIT",
   "type": "module",
-  "bin": "./bin/cli.js",
+  "bin": "./dist/cli.js",
   "scripts": {
-    "lint": "xo .",
-    "test": "node --test test/*.test.js"
+    "build": "babel --out-dir=dist src",
+    "dev": "babel --out-dir=dist --watch src",
+    "lint": "xo",
+    "pretest": "babel --out-dir=dist src",
+    "test": "node --test dist/__tests__/*.test.js dist/__tests__/**/*.test.js"
   },
   "dependencies": {
     "@endernoke/wax": "^1.0.0",
@@ -17,11 +18,35 @@
     "react": "^19.2.6"
   },
   "devDependencies": {
+    "@babel/cli": "^7.28.6",
+    "@babel/preset-react": "^7.28.5",
+    "eslint-config-xo-react": "^0.27.0",
     "ink-testing-library": "^4.0.0",
     "xo": "^0.60.0"
   },
   "xo": {
+    "space": 2,
     "prettier": true,
-    "space": 2
+    "extends": [
+      "xo-react"
+    ],
+    "react": true,
+    "rules": {
+      "react/prop-types": "off",
+      "react/react-in-jsx-scope": "off"
+    }
+  },
+  "babel": {
+    "plugins": [
+      "./babel-plugin-rewrite-esm-imports.cjs"
+    ],
+    "presets": [
+      [
+        "@babel/preset-react",
+        {
+          "runtime": "automatic"
+        }
+      ]
+    ]
   }
 }
