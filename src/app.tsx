@@ -1,5 +1,5 @@
 import { Box } from "ink";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "./components/header.tsx";
 import Footer from "./components/footer.tsx";
 import StepperSection from "./components/stepper-section/index.tsx";
@@ -36,12 +36,27 @@ function getInitialStep(argValues: AppProperties): number {
 
 export default function App({ argValues }: { argValues: AppProperties }) {
   const [step, setStep] = useState<number>(() => getInitialStep(argValues));
+  const [dim, setDim] = useState<{ width: number; height: number }>({
+    width: process.stdout.columns,
+    height: process.stdout.rows,
+  });
+
+  useEffect(() => {
+    const handleResize = () => {
+      setDim({ width: process.stdout.columns, height: process.stdout.rows });
+    };
+
+    process.stdout.on("resize", handleResize);
+    return () => {
+      process.stdout.off("resize", handleResize);
+    };
+  }, []);
 
   return (
     <Box
       flexDirection="column"
-      width={process.stdout.columns}
-      height={process.stdout.rows}
+      width={dim.width}
+      height={dim.height}
       minHeight={16}
       rowGap={1}
       borderStyle="round"
