@@ -7,7 +7,8 @@
   "scripts": {
     "build": "babel --out-dir=dist src",
     "dev": "babel --out-dir=dist --watch src",
-    "lint": "xo",
+    "lint": "eslint .",
+    "format": "prettier --write .",
     "pretest": "babel --out-dir=dist src",
     "test": "node --test dist/__tests__/*.test.js dist/__tests__/**/*.test.js"
   },
@@ -20,21 +21,11 @@
   "devDependencies": {
     "@babel/cli": "^7.28.6",
     "@babel/preset-react": "^7.28.5",
-    "eslint-config-xo-react": "^0.27.0",
     "ink-testing-library": "^4.0.0",
-    "xo": "^0.60.0"
-  },
-  "xo": {
-    "space": 2,
-    "prettier": true,
-    "extends": [
-      "xo-react"
-    ],
-    "react": true,
-    "rules": {
-      "react/prop-types": "off",
-      "react/react-in-jsx-scope": "off"
-    }
+    "eslint": "^10.4.0",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.8.3",
+    "eslint-plugin-react-hooks": "^7.1.1"
   },
   "babel": {
     "plugins": [

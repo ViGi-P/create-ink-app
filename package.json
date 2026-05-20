@@ -1,10 +1,10 @@
 {
   "name": "@vigi-p/create-ink-app",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Generate a starter Ink app",
   "license": "MIT",
   "type": "module",
-  "bin": "./dist/index.js",
+  "bin": "./dist/cli.js",
   "repository": {
     "url": "https://github.com/ViGi-P/create-ink-app",
     "type": "git"
@@ -19,10 +19,22 @@
     "README.md",
     "LICENSE"
   ],
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "^24.0.0",
+      "onFail": "error"
+    }
+  },
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "dev": "tmux new-session -d -s ink-dev 'tsc --watch' && tmux split-window -h -l 100% -t ink-dev 'node --watch ./dist/cli.js' && tmux attach -t ink-dev",
+    "start": "node ./dist/cli.js",
     "build": "tsc",
-    "lint": "xo src test",
-    "test": "pnpm build && node --test test/*.test.js",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "pretest": "tsc",
+    "test": "node --test --experimental-test-module-mocks \"dist/__tests__/**/*.test.js\"",
     "typecheck": "tsc --noEmit"
   },
   "keywords": [
@@ -37,19 +49,33 @@
     "access": "public"
   },
   "dependencies": {
+    "cli-spinners": "^3.4.0",
     "cpy": "^13.2.2",
     "execa": "^9.6.1",
+    "ink": "^7.0.3",
+    "ink-gradient": "^4.0.0",
+    "ink-link": "^5.0.0",
+    "ink-select-input": "^6.2.0",
+    "ink-stepper": "^0.2.1",
+    "ink-task-list": "^2.0.0",
+    "ink-text-input": "^6.0.0",
     "make-dir": "^5.1.0",
-    "meow": "^14.1.0"
+    "meow": "^14.1.0",
+    "react": "^19.2.6",
+    "slugify": "^1.6.9"
   },
   "devDependencies": {
-    "@types/node": "^24.10.2",
-    "typescript": "^6.0.3",
-    "xo": "^0.60.0"
-  },
-  "xo": {
-    "prettier": true,
-    "space": 2
+    "@types/node": "^24.12.4",
+    "@types/react": "^19.2.14",
+    "@typescript-eslint/eslint-plugin": "^8.59.3",
+    "@typescript-eslint/parser": "^8.59.3",
+    "eslint": "^10.4.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "ink-testing-library": "^4.0.0",
+    "nodemon": "^3.1.14",
+    "prettier": "^3.8.3",
+    "typescript": "^6.0.3"
   },
   "packageManager": "pnpm@11.0.9"
 }

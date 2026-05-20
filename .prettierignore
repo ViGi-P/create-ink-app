@@ -1,0 +1,7 @@
+.tokensave
+node_modules
+dist
+coverage
+.DS_Store
+.tmp
+AGENTS.md

@@ -26,23 +26,31 @@ npx @vigi-p/create-ink-app my-new-app
 
 You can skip the interactive prompts by providing flags directly:
 
-| Flag | Description | Values |
-| :--- | :--- | :--- |
-| `--type` | Project architecture | `cli`, `library` |
-| `--template` | Language choice | `js`, `ts` |
-| `--install` | Package manager | `npm`, `yarn`, `pnpm`, `skip` |
-| `--git` | Init git repo | `true` (default), `--no-git` to skip |
+| Flag         | Description          | Values                               |
+| :----------- | :------------------- | :----------------------------------- |
+| `--type`     | Project architecture | `cli`, `library`                     |
+| `--language` | Language choice      | `js`, `ts`                           |
+| `--install`  | Package manager      | `npm`, `yarn`, `pnpm`, `skip`        |
+| `--git`      | Init git repo        | `true` (default), `--no-git` to skip |
 
 ### Examples
 
-**Automated setup for a TypeScript CLI using pnpm:**
+**Step-by-step setup:**
+
 ```sh
-npx @vigi-p/create-ink-app my-cli --type cli --template ts --install pnpm --git
+npx @vigi-p/create-ink-app
+```
+
+**Automated setup for a TypeScript CLI using pnpm:**
+
+```sh
+npx @vigi-p/create-ink-app my-cli --type cli --language ts --install pnpm --git
 ```
 
 **Minimalist setup for a JavaScript library:**
+
 ```sh
-npx @vigi-p/create-ink-app my-lib --type library --template js --install skip --no-git
+npx @vigi-p/create-ink-app my-lib --type library --language js --install skip --no-git
 ```
 
 ## 🛠 Manual Installation

@@ -12,7 +12,7 @@
     "rootDir": "src",
     "skipLibCheck": true,
     "strict": true,
-    "target": "esnext",
+    "target": "esnext"
   },
-  "include": ["src/**/*.ts", "src/__tests__/**/*.ts", "src/**/*.tsx"],
+  "include": ["src/**/*.ts", "src/__tests__/**/*.ts", "src/**/*.tsx"]
 }

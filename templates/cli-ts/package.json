@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "tsc --watch",
     "build": "tsc",
-    "lint": "xo src",
+    "lint": "eslint .",
+    "format": "prettier --write .",
     "pretest": "tsc",
     "test": "node --test dist/__tests__/*.test.js dist/__tests__/**/*.test.js",
     "typecheck": "tsc --noEmit"
@@ -22,14 +23,11 @@
     "@types/react": "^19.2.14",
     "ink-testing-library": "^4.0.0",
     "typescript": "^6.0.3",
-    "xo": "^0.60.0"
-  },
-  "xo": {
-    "prettier": true,
-    "typescript": true,
-    "rules": {
-      "@typescript-eslint/naming-convention": "off",
-      "n/file-extension-in-import": "off"
-    }
+    "@typescript-eslint/eslint-plugin": "^8.59.3",
+    "@typescript-eslint/parser": "^8.59.3",
+    "eslint": "^10.4.0",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.8.3",
+    "eslint-plugin-react-hooks": "^7.1.1"
   }
 }

@@ -5,6 +5,7 @@ Thank you for considering contributing to `create-ink-app`! We welcome all contr
 ## 🛠 Development Setup
 
 1.  **Clone the repository:**
+
     ```sh
     git clone https://github.com/vigi-p/create-ink-app.git
     cd create-ink-app
@@ -12,6 +13,7 @@ Thank you for considering contributing to `create-ink-app`! We welcome all contr
 
 2.  **Install dependencies:**
     This project uses `pnpm`.
+
     ```sh
     pnpm install
     ```
