@@ -24,19 +24,19 @@ function buildExeca() {
   }
 
   function fakeExeca(
-    stringsOrOpts: TemplateStringsArray | Record<string, unknown>,
-    ...values: unknown[]
+    command: string,
+    argsOrOptions: string[] | Record<string, unknown> = [],
+    _options?: Record<string, unknown>,
   ): ReturnType<typeof makeResult> | typeof fakeExeca {
-    if (!Array.isArray(stringsOrOpts)) {
-      return fakeExeca as typeof fakeExeca;
+    const args = Array.isArray(argsOrOptions) ? argsOrOptions : [];
+    const cmd = `${command} ${args.join(" ")}`.trim();
+
+    // Version probes are invoked as: execa("<tool>", ["-v"])
+    if (cmd.endsWith(" -v")) {
+      return makeResult(currentVersions[command] ?? "");
     }
 
-    const cmd = (stringsOrOpts as TemplateStringsArray)
-      .reduce((acc, part, i) => acc + part + (values[i] ?? ""), "")
-      .trim();
-
-    const firstWord = cmd.split(/\s+/)[0] ?? "";
-    const stdout = currentVersions[firstWord] ?? "";
+    const stdout = currentVersions[command] ?? "";
     return makeResult(stdout);
   }
 

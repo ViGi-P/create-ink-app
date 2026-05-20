@@ -7,66 +7,94 @@ export default async function installDependencies(
   language: AppProperties["language"] & string,
   appendLine: (line: string) => void,
 ): Promise<void> {
-  const { stdout: packageManagerVersionStdout } =
-    await execa`${packageManager} -v`;
-  const packageManagerVersionMatch =
-    packageManagerVersionStdout.match(/\d+\.\d+\.\d+/);
-  const packageManagerVersion = packageManagerVersionMatch?.[0];
-  if (!packageManagerVersion) {
-    throw new Error(
-      `Failed to find ${packageManager} version. Check if ${packageManager} is installed correctly.`,
+  try {
+    const { stdout: packageManagerVersionStdout } = await execa(
+      packageManager,
+      ["-v"],
     );
+    const packageManagerVersionMatch =
+      packageManagerVersionStdout.match(/\d+\.\d+\.\d+/);
+    const packageManagerVersion = packageManagerVersionMatch?.[0];
+    if (!packageManagerVersion) {
+      throw new Error(
+        `Failed to find ${packageManager} version. Check if ${packageManager} is installed correctly.`,
+      );
+    }
+
+    appendLine(`Using ${packageManager} version ${packageManagerVersion}`);
+  } catch (error: unknown) {
+    if (error instanceof Error && error.message.includes("ENOENT")) {
+      throw new Error(
+        `Failed to find ${packageManager} version. Check if ${packageManager} is installed correctly.`,
+      );
+    }
+    throw error;
   }
 
-  appendLine(`Using ${packageManager} version ${packageManagerVersion}`);
-
-  const { stdout: nodeVersionStdout } = await execa`node -v`;
-  const nodeVersionMatch = nodeVersionStdout.match(/\d+\.\d+\.\d+/);
-  const nodeVersion = nodeVersionMatch?.[0];
-  const nodeMajorVersion = nodeVersion?.split(".")[0];
-  if (!nodeMajorVersion) {
-    throw new Error(
-      `Failed to find node version. Check if node is installed correctly.`,
-    );
+  let nodeMajorVersion: string | undefined;
+  try {
+    const { stdout: nodeVersionStdout } = await execa(`node`, ["-v"]);
+    const nodeVersionMatch = nodeVersionStdout.match(/\d+\.\d+\.\d+/);
+    const nodeVersion = nodeVersionMatch?.[0];
+    nodeMajorVersion = nodeVersion?.split(".")[0];
+    if (!nodeMajorVersion) {
+      throw new Error(
+        `Failed to find node version. Check if node is installed correctly.`,
+      );
+    }
+  } catch (error: unknown) {
+    if (error instanceof Error && error.message.includes("ENOENT")) {
+      throw new Error(
+        `Failed to find node version. Check if node is installed correctly.`,
+      );
+    }
+    throw error;
   }
 
-  const installCommand =
-    packageManager === "yarn" ? `yarn` : `${packageManager} install`;
+  const installArgs = packageManager === "yarn" ? [] : ["install"];
 
-  for await (const line of execa({
+  for await (const line of execa(packageManager, installArgs, {
     cwd: projectPath,
-    stdio: "inherit",
-  })`${installCommand}`) {
+  })) {
     appendLine(line);
   }
 
   if (language === "ts") {
     switch (packageManager) {
       case "pnpm": {
-        for await (const line of execa({
-          cwd: projectPath,
-          stdio: "inherit",
-        })`pnpm add -D @types/node@^${nodeMajorVersion}`) {
+        for await (const line of execa(
+          packageManager,
+          ["add", "-D", `@types/node@^${nodeMajorVersion}`],
+          {
+            cwd: projectPath,
+          },
+        )) {
           appendLine(line);
         }
         break;
       }
 
       case "npm": {
-        for await (const line of execa({
-          cwd: projectPath,
-          stdio: "inherit",
-        })`npm install -D @types/node@^${nodeMajorVersion}`) {
+        for await (const line of execa(
+          packageManager,
+          ["install", "-D", `@types/node@^${nodeMajorVersion}`],
+          {
+            cwd: projectPath,
+          },
+        )) {
           appendLine(line);
         }
         break;
       }
 
       case "yarn": {
-        for await (const line of execa({
-          cwd: projectPath,
-          stdio: "inherit",
-        })`yarn add -D @types/node@^${nodeMajorVersion}`) {
+        for await (const line of execa(
+          packageManager,
+          ["add", "-D", `@types/node@^${nodeMajorVersion}`],
+          {
+            cwd: projectPath,
+          },
+        )) {
           appendLine(line);
         }
         break;

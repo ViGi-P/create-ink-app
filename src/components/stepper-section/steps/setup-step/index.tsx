@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Box } from "ink";
+import { Box, useInput, useApp } from "ink";
 import { Step, useStepperInput } from "ink-stepper";
 import { TaskList } from "ink-task-list";
 import type { AppProperties } from "../../../../types/app-properties.type.ts";
@@ -14,16 +14,24 @@ export default function SetupStep({
   current: boolean;
   values: Required<AppProperties>;
 }) {
-  const { disableNavigation, enableNavigation } = useStepperInput();
+  const { exit } = useApp();
+  const { disableNavigation } = useStepperInput();
   const [currentTask, setCurrentTask] = useState<
     "template" | "git" | "dependencies"
   >("template");
+  const [allDone, setAllDone] = useState(false);
 
   useEffect(() => {
     if (current && disableNavigation) {
       disableNavigation();
     }
   }, [current, disableNavigation]);
+
+  useInput((_input, key) => {
+    if (key.return && allDone) {
+      exit(0);
+    }
+  });
 
   return (
     <Step name="Setup">
@@ -43,7 +51,9 @@ export default function SetupStep({
             <SetupDependencies
               {...values}
               start={currentTask === "dependencies"}
-              onFinish={enableNavigation}
+              onFinish={() => {
+                setAllDone(true);
+              }}
             />
           </TaskList>
         )}

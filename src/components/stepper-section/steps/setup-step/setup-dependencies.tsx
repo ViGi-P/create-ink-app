@@ -67,7 +67,7 @@ export default function SetupDependencies(
         state={state}
         spinner={cliSpinners.dots}
       />
-      <Box paddingLeft={2}>
+      <Box paddingLeft={2} flexDirection="column">
         {output.map((line, index) => (
           <Text key={index} dimColor>
             {line}

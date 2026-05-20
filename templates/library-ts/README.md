@@ -2,9 +2,9 @@
 
 #### Commands
 
-|       | npm             | yarn             | pnpm             | bun             |
-| ----- | --------------- | ---------------- | ---------------- | --------------- |
-| Dev   | `npm run dev`   | `yarn run dev`   | `pnpm run dev`   | `bun run dev`   |
-| Lint  | `npm run lint`  | `yarn run lint`  | `pnpm run lint`  | `bun run lint`  |
-| Tests | `npm run test`  | `yarn run test`  | `pnpm run test`  | `bun run test`  |
-| Build | `npm run build` | `yarn run build` | `pnpm run build` | `bun run build` |
+|       | npm             | yarn             | pnpm             |
+| ----- | --------------- | ---------------- | ---------------- |
+| Dev   | `npm run dev`   | `yarn run dev`   | `pnpm run dev`   |
+| Lint  | `npm run lint`  | `yarn run lint`  | `pnpm run lint`  |
+| Tests | `npm run test`  | `yarn run test`  | `pnpm run test`  |
+| Build | `npm run build` | `yarn run build` | `pnpm run build` |
