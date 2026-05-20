@@ -15,13 +15,15 @@ export default function SetupGit(
   const [state, setState] = useState<
     "loading" | "pending" | "success" | "error"
   >("loading");
-  const [output, setOutput] = useState<string>("");
+  const [output, setOutput] = useState<string[]>([
+    "Initializing git repository",
+  ]);
   const { start, git, projectName, onFinish } = props;
 
   useEffect(() => {
     async function run() {
       if (!git) {
-        setOutput("Skipped");
+        setOutput(["Skipped"]);
         setState("pending");
         onFinish();
         return;
@@ -30,13 +32,16 @@ export default function SetupGit(
       try {
         const projectPath = path.resolve(projectName);
         await initializeGit(projectPath);
-        setOutput("Initialized git repository");
+        setOutput((prev) => [...prev, "Done"]);
         setState("success");
       } catch (error) {
         if (error instanceof Error) {
-          setOutput(error.message);
+          setOutput((prev) => [...prev, error.message]);
         } else {
-          setOutput(`Unknown error: ${JSON.stringify(error)}`);
+          setOutput((prev) => [
+            ...prev,
+            `Unknown error: ${JSON.stringify(error)}`,
+          ]);
         }
         setState("error");
       } finally {
@@ -51,8 +56,12 @@ export default function SetupGit(
   return (
     <>
       <Task label="Git setup" state={state} spinner={cliSpinners.dots} />
-      <Box paddingLeft={2}>
-        <Text dimColor={true}>{output}</Text>
+      <Box paddingLeft={2} flexDirection="column">
+        {output.map((line, index) => (
+          <Text key={index} dimColor={true}>
+            {line}
+          </Text>
+        ))}
       </Box>
     </>
   );

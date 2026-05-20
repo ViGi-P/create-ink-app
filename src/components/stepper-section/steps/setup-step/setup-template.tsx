@@ -25,8 +25,12 @@ export default function SetupTemplate(
       try {
         const projectPath = path.resolve(projectName);
         await makeDirectory(projectPath);
+        setOutput((prev) => [...prev, "Copying files"]);
         await copyTemplate(type, language, projectPath, (progress) =>
-          setOutput((prev) => [...prev, `Copying files (${progress}%)`]),
+          setOutput((prev) => [
+            ...prev.slice(0, -1),
+            `${prev[prev.length - 1]}...(${progress}%)`,
+          ]),
         );
         setOutput((prev) => [...prev, "Updating package.json"]);
         await updatePackageJSON(projectPath, projectName);

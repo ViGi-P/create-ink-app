@@ -24,6 +24,14 @@ mock.module("ink-stepper", {
   },
 });
 
+mock.module("ink-scroll-view", {
+  namedExports: {
+    ScrollView: ({ children }: { children: React.ReactNode }) => (
+      <Box flexDirection="column">{children}</Box>
+    ),
+  },
+});
+
 mock.module("ink-task-list", {
   namedExports: {
     TaskList: ({ children }: { children: React.ReactNode }) => (

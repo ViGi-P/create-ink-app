@@ -31,6 +31,7 @@ const defaultProps = {
   install: "skip" as const,
   language: "ts" as const,
   onFinish: () => {},
+  scrollDown: () => {},
   start: false,
 };
 

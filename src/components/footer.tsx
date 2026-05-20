@@ -25,9 +25,13 @@ export default function Footer({
       <Text color="cyan">
         <Text inverse>[ENTER]</Text> - {isLast ? "Leave" : "Next"}
       </Text>
-      {!isLast && (
+      {!isLast ? (
         <Text color="cyan">
           <Text inverse>[ESC]</Text> - {isFirst ? "Leave" : "Back"}
+        </Text>
+      ) : (
+        <Text color="cyan">
+          <Text inverse>[⭡/⭣]</Text> - Scroll up/down
         </Text>
       )}
     </Box>

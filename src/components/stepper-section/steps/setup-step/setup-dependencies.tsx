@@ -12,6 +12,7 @@ export default function SetupDependencies(
     "install" | "projectName" | "language"
   > & {
     onFinish: () => void;
+    scrollDown: () => void;
     start: boolean;
   },
 ) {
@@ -19,7 +20,7 @@ export default function SetupDependencies(
     "loading" | "pending" | "success" | "error"
   >("loading");
   const [output, setOutput] = useState<string[]>([]);
-  const { start, install, projectName, onFinish, language } = props;
+  const { start, install, projectName, onFinish, language, scrollDown } = props;
 
   useEffect(() => {
     async function run() {
@@ -36,9 +37,10 @@ export default function SetupDependencies(
           ...prev,
           `Installing dependencies with ${install}`,
         ]);
-        await installDependencies(projectPath, install, language, (line) =>
-          setOutput((prev) => [...prev, line]),
-        );
+        await installDependencies(projectPath, install, language, (line) => {
+          setOutput((prev) => [...prev, line]);
+          scrollDown();
+        });
         setOutput((prev) => [...prev, "Done"]);
         setState("success");
       } catch (error) {

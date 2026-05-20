@@ -42,6 +42,18 @@ mock.module("ink-stepper", {
   },
 });
 
+mock.module("ink-scroll-view", {
+  namedExports: {
+    ScrollView: ({ children }: { children: React.ReactNode }) => (
+      <>{children}</>
+    ),
+    useStepperInput: () => ({
+      disableNavigation: mock.fn(),
+      enableNavigation: mock.fn(),
+    }),
+  },
+});
+
 mock.module("ink-text-input", {
   defaultExport: ({
     value,

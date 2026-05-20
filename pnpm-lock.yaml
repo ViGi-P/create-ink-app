@@ -18,25 +18,28 @@ importers:
         version: 9.6.1
       ink:
         specifier: ^7.0.3
-        version: 7.0.3(@types/react@19.2.14)(react@19.2.6)
+        version: 7.0.3(@types/react@19.2.15)(react@19.2.6)
       ink-gradient:
         specifier: ^4.0.0
-        version: 4.0.0(ink@7.0.3(@types/react@19.2.14)(react@19.2.6))
+        version: 4.0.0(ink@7.0.3(@types/react@19.2.15)(react@19.2.6))
       ink-link:
         specifier: ^5.0.0
-        version: 5.0.0(ink@7.0.3(@types/react@19.2.14)(react@19.2.6))
+        version: 5.0.0(ink@7.0.3(@types/react@19.2.15)(react@19.2.6))
+      ink-scroll-view:
+        specifier: ^0.3.7
+        version: 0.3.7(ink@7.0.3(@types/react@19.2.15)(react@19.2.6))(react@19.2.6)
       ink-select-input:
         specifier: ^6.2.0
-        version: 6.2.0(ink@7.0.3(@types/react@19.2.14)(react@19.2.6))(react@19.2.6)
+        version: 6.2.0(ink@7.0.3(@types/react@19.2.15)(react@19.2.6))(react@19.2.6)
       ink-stepper:
         specifier: ^0.2.1
-        version: 0.2.1(ink@7.0.3(@types/react@19.2.14)(react@19.2.6))(react@19.2.6)
+        version: 0.2.1(ink@7.0.3(@types/react@19.2.15)(react@19.2.6))(react@19.2.6)
       ink-task-list:
         specifier: ^2.0.0
-        version: 2.0.0(ink@7.0.3(@types/react@19.2.14)(react@19.2.6))(react@19.2.6)
+        version: 2.0.0(ink@7.0.3(@types/react@19.2.15)(react@19.2.6))(react@19.2.6)
       ink-text-input:
         specifier: ^6.0.0
-        version: 6.0.0(ink@7.0.3(@types/react@19.2.14)(react@19.2.6))(react@19.2.6)
+        version: 6.0.0(ink@7.0.3(@types/react@19.2.15)(react@19.2.6))(react@19.2.6)
       make-dir:
         specifier: ^5.1.0
         version: 5.1.0
@@ -55,7 +58,7 @@ importers:
         version: 24.12.4
       "@types/react":
         specifier: ^19.2.14
-        version: 19.2.14
+        version: 19.2.15
       "@typescript-eslint/eslint-plugin":
         specifier: ^8.59.3
         version: 8.59.4(@typescript-eslint/parser@8.59.4(eslint@10.4.0)(typescript@6.0.3))(eslint@10.4.0)(typescript@6.0.3)
@@ -73,7 +76,7 @@ importers:
         version: 7.1.1(eslint@10.4.0)
       ink-testing-library:
         specifier: ^4.0.0
-        version: 4.0.0(@types/react@19.2.14)
+        version: 4.0.0(@types/react@19.2.15)
       nodemon:
         specifier: ^3.1.14
         version: 3.1.14
@@ -388,10 +391,10 @@ packages:
         integrity: sha512-GUUEShf+PBCGW2KaXwcIt3Yk+e3pkKwWKb9GSyM9WQVE+ep2jzmHdGsHzu4wgcZy5fN9FBdVzjpBQsYlpfpgLA==,
       }
 
-  "@types/react@19.2.14":
+  "@types/react@19.2.15":
     resolution:
       {
-        integrity: sha512-ilcTH/UniCkMdtexkoCN0bI7pMcJDvmQFPvuPvmEaYA/NSfFTAgdUSLAoVjaRJm7+6PvcM+q1zYOwS4wTYMF9w==,
+        integrity: sha512-eRwcGNHve+E8qtEQSSRl6urh+rFop4v8gm6O8rGv25CodbvFdLjA1vVQ1KkiFE0w0UPOnb8tDiFKL5lp0rtY5Q==,
       }
 
   "@types/tinycolor2@1.4.6":
@@ -703,10 +706,10 @@ packages:
         integrity: sha512-oIPzksmTg4/MriiaYGO+okXDT7ztn/w3Eptv/+gSIdMdKsJo0u4CfYNFJPy+4SKMuCqGw2wxnA+URMg3t8a/bQ==,
       }
 
-  electron-to-chromium@1.5.358:
+  electron-to-chromium@1.5.359:
     resolution:
       {
-        integrity: sha512-EO7tKm3QxRqTs1lSuPXzl6yRAwznehp0AH9OoMOIC+4mQzTFday8FJCO5KU6J/TFSQXEOahNq4vTKpz1jmCVOA==,
+        integrity: sha512-8lPELWuYZIWk7NDvCNthtmMw/7Q5Wu25NpM4djFMHBmk8DubPAtL4YTOp7ou0e7HyJtwkVlWv8XMLURnrtgJQw==,
       }
 
   environment@1.1.0:
@@ -1068,6 +1071,15 @@ packages:
     engines: { node: ">=18" }
     peerDependencies:
       ink: ">=6"
+
+  ink-scroll-view@0.3.7:
+    resolution:
+      {
+        integrity: sha512-lUBLxSbVry/+UtJhuvRu6wumP43+ScVp69J7e+hmYwz1kTkahWfkVwWOu7Mn1DMPb8AU8bnsmEsr6kvSJvnaRw==,
+      }
+    peerDependencies:
+      ink: ^5 || ^6 || ^7
+      react: ^18 || ^19
 
   ink-select-input@6.2.0:
     resolution:
@@ -2113,7 +2125,7 @@ snapshots:
     dependencies:
       undici-types: 7.16.0
 
-  "@types/react@19.2.14":
+  "@types/react@19.2.15":
     dependencies:
       csstype: 3.2.3
 
@@ -2256,7 +2268,7 @@ snapshots:
     dependencies:
       baseline-browser-mapping: 2.10.31
       caniuse-lite: 1.0.30001793
-      electron-to-chromium: 1.5.358
+      electron-to-chromium: 1.5.359
       node-releases: 2.0.44
       update-browserslist-db: 1.2.3(browserslist@4.28.2)
 
@@ -2327,7 +2339,7 @@ snapshots:
 
   deep-is@0.1.4: {}
 
-  electron-to-chromium@1.5.358: {}
+  electron-to-chromium@1.5.359: {}
 
   environment@1.1.0: {}
 
@@ -2537,47 +2549,52 @@ snapshots:
 
   indent-string@5.0.0: {}
 
-  ink-gradient@4.0.0(ink@7.0.3(@types/react@19.2.14)(react@19.2.6)):
+  ink-gradient@4.0.0(ink@7.0.3(@types/react@19.2.15)(react@19.2.6)):
     dependencies:
       "@types/gradient-string": 1.1.6
       gradient-string: 3.0.0
-      ink: 7.0.3(@types/react@19.2.14)(react@19.2.6)
+      ink: 7.0.3(@types/react@19.2.15)(react@19.2.6)
       strip-ansi: 7.2.0
 
-  ink-link@5.0.0(ink@7.0.3(@types/react@19.2.14)(react@19.2.6)):
+  ink-link@5.0.0(ink@7.0.3(@types/react@19.2.15)(react@19.2.6)):
     dependencies:
-      ink: 7.0.3(@types/react@19.2.14)(react@19.2.6)
+      ink: 7.0.3(@types/react@19.2.15)(react@19.2.6)
       terminal-link: 5.0.0
 
-  ink-select-input@6.2.0(ink@7.0.3(@types/react@19.2.14)(react@19.2.6))(react@19.2.6):
+  ink-scroll-view@0.3.7(ink@7.0.3(@types/react@19.2.15)(react@19.2.6))(react@19.2.6):
+    dependencies:
+      ink: 7.0.3(@types/react@19.2.15)(react@19.2.6)
+      react: 19.2.6
+
+  ink-select-input@6.2.0(ink@7.0.3(@types/react@19.2.15)(react@19.2.6))(react@19.2.6):
     dependencies:
       figures: 6.1.0
-      ink: 7.0.3(@types/react@19.2.14)(react@19.2.6)
+      ink: 7.0.3(@types/react@19.2.15)(react@19.2.6)
       react: 19.2.6
       to-rotated: 1.0.0
 
-  ink-stepper@0.2.1(ink@7.0.3(@types/react@19.2.14)(react@19.2.6))(react@19.2.6):
+  ink-stepper@0.2.1(ink@7.0.3(@types/react@19.2.15)(react@19.2.6))(react@19.2.6):
     dependencies:
-      ink: 7.0.3(@types/react@19.2.14)(react@19.2.6)
+      ink: 7.0.3(@types/react@19.2.15)(react@19.2.6)
       react: 19.2.6
 
-  ink-task-list@2.0.0(ink@7.0.3(@types/react@19.2.14)(react@19.2.6))(react@19.2.6):
+  ink-task-list@2.0.0(ink@7.0.3(@types/react@19.2.15)(react@19.2.6))(react@19.2.6):
     dependencies:
-      ink: 7.0.3(@types/react@19.2.14)(react@19.2.6)
+      ink: 7.0.3(@types/react@19.2.15)(react@19.2.6)
       react: 19.2.6
 
-  ink-testing-library@4.0.0(@types/react@19.2.14):
+  ink-testing-library@4.0.0(@types/react@19.2.15):
     optionalDependencies:
-      "@types/react": 19.2.14
+      "@types/react": 19.2.15
 
-  ink-text-input@6.0.0(ink@7.0.3(@types/react@19.2.14)(react@19.2.6))(react@19.2.6):
+  ink-text-input@6.0.0(ink@7.0.3(@types/react@19.2.15)(react@19.2.6))(react@19.2.6):
     dependencies:
       chalk: 5.6.2
-      ink: 7.0.3(@types/react@19.2.14)(react@19.2.6)
+      ink: 7.0.3(@types/react@19.2.15)(react@19.2.6)
       react: 19.2.6
       type-fest: 4.41.0
 
-  ink@7.0.3(@types/react@19.2.14)(react@19.2.6):
+  ink@7.0.3(@types/react@19.2.15)(react@19.2.6):
     dependencies:
       "@alcalzone/ansi-tokenize": 0.3.0
       ansi-escapes: 7.3.0
@@ -2606,7 +2623,7 @@ snapshots:
       ws: 8.20.1
       yoga-layout: 3.2.1
     optionalDependencies:
-      "@types/react": 19.2.14
+      "@types/react": 19.2.15
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
