@@ -1,6 +1,10 @@
 import assert from "node:assert/strict";
 import { describe, it, mock } from "node:test";
 
+// ---------------------------------------------------------------------------
+// Mocks
+// ---------------------------------------------------------------------------
+
 // In-memory package.json stored per path.
 const fakeFiles = new Map<string, string>();
 
@@ -16,6 +20,8 @@ mock.module("node:fs/promises", {
     }),
   },
 });
+
+// ---------------------------------------------------------------------------
 
 const { default: updatePackageJSON } =
   await import("../../utils/update-package-json.ts");

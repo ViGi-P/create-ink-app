@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { describe, it, mock, beforeEach } from "node:test";
 
 // ---------------------------------------------------------------------------
-// Mock execa before importing the module.
+// Mocks
 // ---------------------------------------------------------------------------
 
 const DEFAULT_VERSIONS: Record<string, string> = {

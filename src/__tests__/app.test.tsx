@@ -2,9 +2,10 @@ import assert from "node:assert/strict";
 import { describe, it, mock } from "node:test";
 import React from "react";
 import { Text, Box } from "ink";
+import { render } from "ink-testing-library";
 
 // ---------------------------------------------------------------------------
-// Mocks — must precede component imports
+// Mocks
 // ---------------------------------------------------------------------------
 
 mock.module("ink-stepper", {
@@ -118,7 +119,6 @@ mock.module("execa", {
 
 // ---------------------------------------------------------------------------
 
-import { render } from "ink-testing-library";
 const { default: App } = (await import("../app.tsx")) as unknown as {
   default: typeof import("../app.tsx").default;
 };

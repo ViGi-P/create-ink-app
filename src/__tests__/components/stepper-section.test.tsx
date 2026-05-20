@@ -2,9 +2,10 @@ import assert from "node:assert/strict";
 import { describe, it, mock } from "node:test";
 import React from "react";
 import { Text, Box } from "ink";
+import { render } from "ink-testing-library";
 
 // ---------------------------------------------------------------------------
-// Mocks — must precede component import
+// Mocks
 // ---------------------------------------------------------------------------
 
 mock.module("ink-stepper", {
@@ -94,7 +95,6 @@ mock.module("cpy", {
 
 // ---------------------------------------------------------------------------
 
-import { render } from "ink-testing-library";
 const { default: StepperSection } =
   (await import("../../components/stepper-section/index.tsx")) as unknown as {
     default: typeof import("../../components/stepper-section/index.tsx").default;

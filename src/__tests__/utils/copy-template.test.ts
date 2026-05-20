@@ -1,12 +1,12 @@
 import assert from "node:assert/strict";
 import { describe, it, mock } from "node:test";
 
+// ---------------------------------------------------------------------------
+// Mocks
+// ---------------------------------------------------------------------------
+
 // Track calls to the progress callback.
 let capturedProgress: number[] = [];
-
-// ---------------------------------------------------------------------------
-// Mock cpy
-// ---------------------------------------------------------------------------
 
 mock.module("cpy", {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -1,8 +1,30 @@
 import assert from "node:assert/strict";
-import { describe, it } from "node:test";
-import "../_shared-mocks.tsx";
+import { describe, it, mock } from "node:test";
+import { Text } from "ink";
 import { render } from "ink-testing-library";
-import { TaskList } from "ink-task-list";
+
+// ---------------------------------------------------------------------------
+// Mocks
+// ---------------------------------------------------------------------------
+
+mock.module("ink-task-list", {
+  namedExports: {
+    Task: ({
+      label,
+      state,
+    }: {
+      label: string;
+      state: string;
+      spinner?: unknown;
+    }) => <Text>{`${label} [${state}]`}</Text>,
+  },
+});
+
+mock.module("cli-spinners", {
+  defaultExport: { dots: { interval: 80, frames: ["."] } },
+});
+
+// ---------------------------------------------------------------------------
 
 const defaultProps = {
   projectName: "test-two",
@@ -17,25 +39,19 @@ const { default: SetupDependencies } =
     default: typeof import("../../../../components/stepper-section/steps/setup-step/setup-dependencies.tsx").default;
   };
 
-const WrappedSetupDependencies = ({
-  overrides = {},
-}: {
-  overrides?: Partial<typeof SetupDependencies>;
-}) => (
-  <TaskList>
-    <SetupDependencies {...defaultProps} {...overrides} />
-  </TaskList>
-);
-
 void describe("SetupDependencies", () => {
   void it("renders 'Installing dependencies' task label", () => {
-    const { lastFrame, unmount } = render(<WrappedSetupDependencies />);
+    const { lastFrame, unmount } = render(
+      <SetupDependencies {...defaultProps} />,
+    );
     assert.match(lastFrame() ?? "", /Installing dependencies/);
     unmount();
   });
 
   void it("renders in loading state initially", () => {
-    const { lastFrame, unmount } = render(<WrappedSetupDependencies />);
+    const { lastFrame, unmount } = render(
+      <SetupDependencies {...defaultProps} />,
+    );
     assert.match(lastFrame() ?? "", /\[loading\]/);
     unmount();
   });
@@ -43,12 +59,11 @@ void describe("SetupDependencies", () => {
   void it("calls onFinish and shows 'Skipped' when install=skip", async () => {
     let finished = false;
     const { lastFrame, unmount } = render(
-      <WrappedSetupDependencies
-        overrides={{
-          start: true,
-          onFinish: () => {
-            finished = true;
-          },
+      <SetupDependencies
+        {...defaultProps}
+        start
+        onFinish={() => {
+          finished = true;
         }}
       />,
     );
