@@ -1,10 +1,8 @@
 # create-ink-app 🎨
 
-<video src="assets/demo.webm" controls></video>
+> ~~The quickest 😝~~ An interactive & opinionated way to bootstrap your next [Ink](https://github.com/vadimdemedes/ink) project.
 
----
-
-> ~~The quickest 😝~~ An opinionated way to bootstrap your next [Ink](https://github.com/vadimdemedes/ink) project.
+![](https://github.com/ViGi-P/create-ink-app/blob/main/assets/demo.gif)
 
 Scaffold a ready-to-go Ink application with zero friction. Whether you're building a full-blown CLI or a reusable terminal library, this tool handles the boilerplate so you can focus on building beautiful terminal interfaces.
 
