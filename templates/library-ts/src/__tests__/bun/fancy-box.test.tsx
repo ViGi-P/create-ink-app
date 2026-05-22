@@ -2,7 +2,7 @@ import { expect } from "bun:test";
 import { describe, it } from "bun:test";
 import { Text } from "ink";
 import { render } from "ink-testing-library";
-import { FancyBox } from "../index.ts";
+import { FancyBox } from "../../index.ts";
 
 void describe("FancyBox", async () => {
   void it("renders with children", () => {

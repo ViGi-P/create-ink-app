@@ -1,34 +1,15 @@
 import assert from "node:assert/strict";
-import { describe, it, mock } from "node:test";
-import React from "react";
-import { Text } from "ink";
+import { describe, it } from "node:test";
 import { render } from "ink-testing-library";
 
 // ---------------------------------------------------------------------------
 // Mocks
 // ---------------------------------------------------------------------------
 
-mock.module("ink-stepper", {
-  namedExports: {
-    Step: ({
-      children,
-    }: {
-      children: React.ReactNode;
-      name: string;
-      canProceed?: boolean;
-    }) => <>{children}</>,
-  },
-});
+import "../../shared-mocks/ink-stepper.tsx";
+import "../../shared-mocks/ink-text-input.tsx";
 
-mock.module("ink-text-input", {
-  defaultExport: ({
-    value,
-  }: {
-    value: string;
-    onChange: (v: string) => void;
-    onSubmit?: (v: string) => void;
-  }) => <Text>{value}</Text>,
-});
+// ---------------------------------------------------------------------------
 
 const { default: NameStep } =
   (await import("../../../components/stepper-section/steps/name-step.tsx")) as unknown as {

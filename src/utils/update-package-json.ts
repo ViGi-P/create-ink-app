@@ -16,10 +16,14 @@ export default async function updatePackageJSON(
   };
   packageJson.name = packageName;
 
-  if (pm === "bun" && packageJson.scripts) {
-    packageJson.scripts["test"] = "bun test";
-    if (packageJson.scripts["pretest"]) {
-      delete packageJson.scripts["pretest"];
+  if (packageJson.scripts) {
+    if (pm === "bun") {
+      packageJson.scripts["test"] = "bun test ./src";
+      if (packageJson.scripts["pretest"]) {
+        delete packageJson.scripts["pretest"];
+      }
+    } else {
+      packageJson.scripts["test"] = 'node --test "dist/__tests__/**/*.test.js"';
     }
   }
 

@@ -47,22 +47,29 @@ if (
   typeof cli.flags.type === "string" &&
   !["library", "cli"].includes(cli.flags.type)
 ) {
-  errors.push(`--type=${cli.flags.type}`);
+  errors.push(
+    `--type=${cli.flags.type}. Allowed values are "library" or "cli".`,
+  );
 }
 if (
   typeof cli.flags.language === "string" &&
   !["js", "ts"].includes(cli.flags.language)
 ) {
-  errors.push(`--language=${cli.flags.language}`);
+  errors.push(
+    `--language=${cli.flags.language}. Allowed values are "js" or "ts".`,
+  );
 }
 if (
   typeof cli.flags.pm === "string" &&
   !["npm", "yarn", "pnpm", "bun"].includes(cli.flags.pm)
 ) {
-  errors.push(`--pm=${cli.flags.pm}`);
+  errors.push(
+    `--pm=${cli.flags.pm}. Allowed values are "npm", "yarn", "pnpm", or "bun".`,
+  );
 }
 if (errors.length > 0) {
-  console.error(`Invalid options: ${errors.join(", ")}`);
+  console.error("Invalid options:");
+  errors.forEach((error) => console.error(error));
   process.exit(1);
 } else {
   const argValues = {

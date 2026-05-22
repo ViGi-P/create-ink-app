@@ -1,121 +1,21 @@
 import assert from "node:assert/strict";
-import { describe, it, mock } from "node:test";
-import React from "react";
-import { Text, Box } from "ink";
+import { describe, it } from "node:test";
 import { render } from "ink-testing-library";
 
 // ---------------------------------------------------------------------------
 // Mocks
 // ---------------------------------------------------------------------------
 
-mock.module("ink-stepper", {
-  namedExports: {
-    Stepper: ({
-      children,
-      renderProgress,
-    }: {
-      children: React.ReactNode;
-      step: number;
-      onStepChange: (n: number) => void;
-      renderProgress: (args: {
-        steps: { name: string; completed: boolean; current: boolean }[];
-      }) => React.ReactNode;
-      onComplete: () => void;
-      onCancel: () => void;
-    }) => (
-      <Box flexDirection="column">
-        {renderProgress({ steps: [] })}
-        {children}
-      </Box>
-    ),
-    Step: ({
-      children,
-    }: {
-      children: React.ReactNode;
-      name: string;
-      canProceed?: boolean;
-    }) => <>{children}</>,
-    useStepperInput: () => ({
-      disableNavigation: mock.fn(),
-      enableNavigation: mock.fn(),
-    }),
-  },
-});
-
-mock.module("ink-text-input", {
-  defaultExport: ({
-    value,
-  }: {
-    value: string;
-    onChange: (v: string) => void;
-  }) => <Text>{value}</Text>,
-});
-
-mock.module("ink-select-input", {
-  defaultExport: ({
-    items,
-  }: {
-    items: { value: unknown; label: string }[];
-    initialIndex?: number;
-    onSelect: (item: { value: unknown; label: string }) => void;
-  }) => (
-    <Box flexDirection="column">
-      {items.map((item, i) => (
-        <Text key={i}>{item.label}</Text>
-      ))}
-    </Box>
-  ),
-});
-
-mock.module("ink-task-list", {
-  namedExports: {
-    TaskList: ({ children }: { children: React.ReactNode }) => (
-      <Box flexDirection="column">{children}</Box>
-    ),
-    Task: ({ label, state }: { label: string; state: string }) => (
-      <Text>{`${label} [${state}]`}</Text>
-    ),
-  },
-});
-
-mock.module("cli-spinners", {
-  defaultExport: { dots: { interval: 80, frames: ["."] } },
-});
-mock.module("make-dir", {
-  namedExports: { makeDirectory: mock.fn(async () => undefined) },
-});
-mock.module("cpy", {
-  defaultExport: mock.fn(async () => undefined),
-});
-
-// ink-gradient – render children as-is
-mock.module("ink-gradient", {
-  defaultExport: ({
-    children,
-  }: {
-    children: React.ReactNode;
-    name?: string;
-  }) => <>{children}</>,
-});
-
-// ink-link – render children (or fallback url) as Text
-mock.module("ink-link", {
-  defaultExport: ({
-    children,
-    fallback,
-    url,
-  }: {
-    children: React.ReactNode;
-    url: string;
-    fallback?: (_text: React.ReactNode, url: string) => string;
-  }) => <Text>{fallback ? fallback(children, url) : children}</Text>,
-});
-
-mock.module("execa", {
-  namedExports: {
-    execa: mock.fn(() => ({ stdout: "execa output", exitCode: 0 })),
-  },
-});
+import "./shared-mocks/ink-stepper.tsx";
+import "./shared-mocks/ink-text-input.tsx";
+import "./shared-mocks/ink-select-input.tsx";
+import "./shared-mocks/ink-task-list.tsx";
+import "./shared-mocks/cli-spinners.ts";
+import "./shared-mocks/make-dir.ts";
+import "./shared-mocks/cpy.ts";
+import "./shared-mocks/ink-gradient.tsx";
+import "./shared-mocks/ink-link.tsx";
+import "./shared-mocks/execa.ts";
 
 // ---------------------------------------------------------------------------
 

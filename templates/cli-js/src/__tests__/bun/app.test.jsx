@@ -1,7 +1,7 @@
 import { expect } from "bun:test";
 import { describe, it } from "bun:test";
 import { render } from "ink-testing-library";
-import App from "../app.jsx";
+import App from "../../app.jsx";
 
 describe("App", async () => {
   it("renders hello world", () => {

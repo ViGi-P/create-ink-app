@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { render } from "ink-testing-library";
-import { HelloWorldBanner } from "../index.ts";
+import { HelloWorldBanner } from "../../index.ts";
 
 void describe("HelloWorldBanner", async () => {
   void it("renders", () => {

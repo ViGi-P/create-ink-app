@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { render } from "ink-testing-library";
-import App from "../app.jsx";
+import App from "../../app.jsx";
 
 describe("App", async () => {
   it("renders hello world", () => {

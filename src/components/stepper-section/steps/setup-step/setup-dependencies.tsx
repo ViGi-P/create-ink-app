@@ -36,8 +36,10 @@ export default function SetupDependencies(
         const projectPath = path.resolve(projectName);
         setOutput((prev) => [...prev, `Installing dependencies with ${pm}`]);
         await installDependencies(projectPath, pm, language, (line) => {
-          setOutput((prev) => [...prev, line]);
-          scrollDown();
+          setOutput((prev) => {
+            if (prev.length > 6) scrollDown();
+            return [...prev, line];
+          });
         });
         setOutput((prev) => [...prev, "Done"]);
         setState("success");

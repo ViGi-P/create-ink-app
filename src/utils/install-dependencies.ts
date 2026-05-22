@@ -1,5 +1,6 @@
 import { execa } from "execa";
 import type { AppProperties } from "../types/app-properties.type.ts";
+import updateTsconfigTypesArray from "./update-tsconfig-types-array.ts";
 
 export default async function installDependencies(
   projectPath: string,
@@ -73,8 +74,7 @@ export default async function installDependencies(
         : `@types/node@^${runtimeMajorVersion}`;
 
     switch (packageManager) {
-      case "pnpm":
-      case "bun": {
+      case "pnpm": {
         for await (const line of execa(
           packageManager,
           ["add", "-D", typesPackage],
@@ -110,6 +110,20 @@ export default async function installDependencies(
         )) {
           appendLine(line);
         }
+        break;
+      }
+
+      case "bun": {
+        for await (const line of execa(
+          packageManager,
+          ["add", "-D", typesPackage],
+          {
+            cwd: projectPath,
+          },
+        )) {
+          appendLine(line);
+        }
+        await updateTsconfigTypesArray(projectPath, ["bun"]);
         break;
       }
     }

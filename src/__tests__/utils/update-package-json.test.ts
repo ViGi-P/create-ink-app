@@ -1,25 +1,11 @@
 import assert from "node:assert/strict";
-import { describe, it, mock } from "node:test";
+import { describe, it } from "node:test";
 
 // ---------------------------------------------------------------------------
 // Mocks
 // ---------------------------------------------------------------------------
 
-// In-memory package.json stored per path.
-const fakeFiles = new Map<string, string>();
-
-mock.module("node:fs/promises", {
-  namedExports: {
-    readFile: mock.fn(async (p: string) => {
-      const content = fakeFiles.get(p);
-      if (content === undefined) throw new Error(`File not found: ${p}`);
-      return content;
-    }),
-    writeFile: mock.fn(async (p: string, data: string) => {
-      fakeFiles.set(p, data);
-    }),
-  },
-});
+import { fakeFiles } from "../shared-mocks/node:fs-promises.ts";
 
 // ---------------------------------------------------------------------------
 

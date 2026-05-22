@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { render } from "ink-testing-library";
 import { Router } from "@endernoke/wax";
-import EscapeKey from "../../components/escape-key.tsx";
+import EscapeKey from "../../../components/escape-key.jsx";
 
 const renderEscapeKey = (initialHistory = ["/"]) =>
   render(
@@ -16,8 +16,8 @@ const delay = async (ms = 20) =>
     setTimeout(resolve, ms);
   });
 
-void describe("Escape Key", async () => {
-  void it("renders quit at root", async () => {
+describe("EscapeKey", async () => {
+  it("renders quit at root", async () => {
     const { lastFrame, unmount } = renderEscapeKey(["/"]);
     await delay();
 
@@ -26,7 +26,7 @@ void describe("Escape Key", async () => {
     unmount();
   });
 
-  void it("renders go back when history exists", async () => {
+  it("renders go back when history exists", async () => {
     const { lastFrame, unmount } = renderEscapeKey(["/", "/users/123"]);
     await delay();
 
@@ -35,7 +35,7 @@ void describe("Escape Key", async () => {
     unmount();
   });
 
-  void it("pressing escape goes back", async () => {
+  it("pressing escape goes back", async () => {
     const { lastFrame, stdin, unmount } = renderEscapeKey(["/", "/users/123"]);
     await delay();
 

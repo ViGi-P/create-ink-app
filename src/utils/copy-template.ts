@@ -1,9 +1,8 @@
 import cpy from "cpy";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { readdir, readFile, rename, rm, writeFile } from "node:fs/promises";
 import type { AppProperties } from "../types/app-properties.type.ts";
-
-import { rm, rename } from "node:fs/promises";
 
 export default async function copyTemplate(
   pm: AppProperties["pm"] & string,
@@ -40,12 +39,43 @@ export default async function copyTemplate(
   });
 
   // Move tests up one directory
-  const { readdir } = await import("node:fs/promises");
   const testFiles = await readdir(runtimeTestsPath);
   for (const file of testFiles) {
     await rename(path.join(runtimeTestsPath, file), path.join(testsPath, file));
   }
 
+  const testFilesToEdit = await getTestFiles(testsPath);
+  for (const file of testFilesToEdit) {
+    const content = await readFile(file, "utf8");
+    const updatedContent = content.replace(/^.*\bimport\b.*$/gm, (line) =>
+      line.replace(/(?:\.\.\/){2,}/g, (parentPath) => parentPath.slice(3)),
+    );
+
+    if (updatedContent !== content) {
+      await writeFile(file, updatedContent);
+    }
+  }
+
   // Remove the now-empty runtime directory
   await rm(runtimeTestsPath, { recursive: true, force: true });
+}
+
+async function getTestFiles(directory: string): Promise<string[]> {
+  const entries = await readdir(directory, { withFileTypes: true });
+  const files: string[] = [];
+
+  for (const entry of entries) {
+    const entryPath = path.join(directory, entry.name);
+
+    if (entry.isDirectory()) {
+      files.push(...(await getTestFiles(entryPath)));
+      continue;
+    }
+
+    if (entry.isFile() && /\.test\.[cm]?[jt]sx?$/.test(entry.name)) {
+      files.push(entryPath);
+    }
+  }
+
+  return files;
 }

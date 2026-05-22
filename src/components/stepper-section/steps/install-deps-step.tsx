@@ -9,13 +9,13 @@ const items = [
 
 export default function InstallDepsStep({
   onChange,
-  install,
+  install = true,
 }: {
   onChange: (install: boolean) => void;
   install?: boolean;
 }) {
   return (
-    <Step name="Install" canProceed={install !== undefined}>
+    <Step name="Install">
       <Box flexDirection="column">
         <Text bold>Install dependencies?</Text>
         <SelectInput
