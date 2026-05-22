@@ -1,34 +1,14 @@
 import assert from "node:assert/strict";
-import { describe, it, mock } from "node:test";
-import { Text } from "ink";
+import { describe, it } from "node:test";
 import { render } from "ink-testing-library";
 
 // ---------------------------------------------------------------------------
 // Mocks
 // ---------------------------------------------------------------------------
 
-mock.module("ink-task-list", {
-  namedExports: {
-    Task: ({
-      label,
-      state,
-    }: {
-      label: string;
-      state: string;
-      spinner?: unknown;
-    }) => <Text>{`${label} [${state}]`}</Text>,
-  },
-});
-
-mock.module("cli-spinners", {
-  defaultExport: { dots: { interval: 80, frames: ["."] } },
-});
-
-mock.module("execa", {
-  namedExports: {
-    execa: mock.fn(async () => ({ stdout: "", exitCode: 0 })),
-  },
-});
+import "../../../shared-mocks/ink-task-list.tsx";
+import "../../../shared-mocks/cli-spinners.ts";
+import "../../../shared-mocks/execa.ts";
 
 // ---------------------------------------------------------------------------
 

@@ -22,7 +22,7 @@ jobs:
       - run: pnpm typecheck
       - run: pnpm test
 
-  templates:
+  node-templates:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -47,4 +47,26 @@ jobs:
       - run: pnpm lint
         working-directory: templates/${{ matrix.template }}
       - run: pnpm test
+        working-directory: templates/${{ matrix.template }}
+
+  bun-templates:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        template:
+          - library-js
+          - library-ts
+          - cli-js
+          - cli-ts
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - run: bun install
+        working-directory: templates/${{ matrix.template }}
+      - run: bun add -D @types/bun@latest
+        working-directory: templates/${{ matrix.template }}
+      - run: bun test src/__tests__/bun
         working-directory: templates/${{ matrix.template }}

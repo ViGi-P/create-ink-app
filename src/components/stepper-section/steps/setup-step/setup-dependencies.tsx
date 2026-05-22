@@ -9,7 +9,7 @@ import installDependencies from "../../../../utils/install-dependencies.ts";
 export default function SetupDependencies(
   props: Pick<
     Required<AppProperties>,
-    "install" | "projectName" | "language"
+    "install" | "pm" | "projectName" | "language"
   > & {
     onFinish: () => void;
     scrollDown: () => void;
@@ -20,11 +20,12 @@ export default function SetupDependencies(
     "loading" | "pending" | "success" | "error"
   >("loading");
   const [output, setOutput] = useState<string[]>([]);
-  const { start, install, projectName, onFinish, language, scrollDown } = props;
+  const { start, install, pm, projectName, onFinish, language, scrollDown } =
+    props;
 
   useEffect(() => {
     async function run() {
-      if (install === "skip") {
+      if (!install) {
         setOutput(["Skipped"]);
         setState("pending");
         onFinish();
@@ -33,13 +34,12 @@ export default function SetupDependencies(
 
       try {
         const projectPath = path.resolve(projectName);
-        setOutput((prev) => [
-          ...prev,
-          `Installing dependencies with ${install}`,
-        ]);
-        await installDependencies(projectPath, install, language, (line) => {
-          setOutput((prev) => [...prev, line]);
-          scrollDown();
+        setOutput((prev) => [...prev, `Installing dependencies with ${pm}`]);
+        await installDependencies(projectPath, pm, language, (line) => {
+          setOutput((prev) => {
+            if (prev.length > 6) scrollDown();
+            return [...prev, line];
+          });
         });
         setOutput((prev) => [...prev, "Done"]);
         setState("success");

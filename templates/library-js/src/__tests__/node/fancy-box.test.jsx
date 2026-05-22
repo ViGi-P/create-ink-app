@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { Text } from "ink";
 import { render } from "ink-testing-library";
-import { FancyBox } from "../index.js";
+import { FancyBox } from "../../index.js";
 
 describe("FancyBox", async () => {
   it("renders with children", () => {

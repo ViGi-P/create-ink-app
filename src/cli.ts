@@ -15,7 +15,9 @@ const cli = meow(
     --language   Template language: js or ts
     --git        Initialize a git repo
     --no-git     Skip git repo initialization
-    --install    Install dependencies with npm, yarn, pnpm, or skip
+    --pm         Package manager to use: npm, yarn, pnpm, bun
+    --install    Install dependencies
+    --no-install Skip dependency installation
 `,
   {
     importMeta: import.meta,
@@ -27,8 +29,11 @@ const cli = meow(
       language: {
         type: "string",
       },
-      install: {
+      pm: {
         type: "string",
+      },
+      install: {
+        type: "boolean",
       },
       git: {
         type: "boolean",
@@ -42,29 +47,37 @@ if (
   typeof cli.flags.type === "string" &&
   !["library", "cli"].includes(cli.flags.type)
 ) {
-  errors.push(`--type=${cli.flags.type}`);
+  errors.push(
+    `--type=${cli.flags.type}. Allowed values are "library" or "cli".`,
+  );
 }
 if (
   typeof cli.flags.language === "string" &&
   !["js", "ts"].includes(cli.flags.language)
 ) {
-  errors.push(`--language=${cli.flags.language}`);
+  errors.push(
+    `--language=${cli.flags.language}. Allowed values are "js" or "ts".`,
+  );
 }
 if (
-  typeof cli.flags.install === "string" &&
-  !["npm", "yarn", "pnpm", "skip"].includes(cli.flags.install)
+  typeof cli.flags.pm === "string" &&
+  !["npm", "yarn", "pnpm", "bun"].includes(cli.flags.pm)
 ) {
-  errors.push(`--install=${cli.flags.install}`);
+  errors.push(
+    `--pm=${cli.flags.pm}. Allowed values are "npm", "yarn", "pnpm", or "bun".`,
+  );
 }
 if (errors.length > 0) {
-  console.error(`Invalid options: ${errors.join(", ")}`);
+  console.error("Invalid options:");
+  errors.forEach((error) => console.error(error));
   process.exit(1);
 } else {
   const argValues = {
     projectName: slugify(cli.input[0] ?? "", { lower: true, strict: true }),
     type: cli.flags.type as "library" | "cli" | undefined,
     language: cli.flags.language as "js" | "ts" | undefined,
-    install: cli.flags.install as "npm" | "yarn" | "pnpm" | "skip" | undefined,
+    pm: cli.flags.pm as "npm" | "yarn" | "pnpm" | "bun" | undefined,
+    install: cli.flags.install,
     git: cli.flags.git,
   };
 

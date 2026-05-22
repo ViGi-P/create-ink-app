@@ -1,8 +1,8 @@
-import assert from "node:assert/strict";
-import { describe, it } from "node:test";
+import { expect } from "bun:test";
+import { describe, it } from "bun:test";
 import { Text } from "ink";
 import { render } from "ink-testing-library";
-import { FancyBox } from "../index.ts";
+import { FancyBox } from "../../index.ts";
 
 void describe("FancyBox", async () => {
   void it("renders with children", () => {
@@ -12,14 +12,14 @@ void describe("FancyBox", async () => {
       </FancyBox>,
     );
 
-    assert.notEqual(lastFrame()?.search(/Hello FancyBox!/), -1);
+    expect(lastFrame()?.search(/Hello FancyBox!/)).not.toBe(-1);
     unmount();
   });
 
   void it("null without children", () => {
     const { lastFrame, unmount } = render(<FancyBox />);
 
-    assert.equal(!lastFrame(), true);
+    expect(!lastFrame()).toBe(true);
     unmount();
   });
 });
