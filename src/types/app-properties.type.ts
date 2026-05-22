@@ -2,6 +2,7 @@ export type AppProperties = {
   readonly projectName?: string;
   readonly type?: "library" | "cli";
   readonly language?: "js" | "ts";
-  readonly install?: "npm" | "yarn" | "pnpm" | "skip";
+  readonly pm?: "npm" | "yarn" | "pnpm" | "bun";
+  readonly install?: boolean;
   readonly git?: boolean;
 };

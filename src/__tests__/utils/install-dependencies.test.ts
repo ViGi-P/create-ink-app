@@ -47,10 +47,12 @@ mock.module("execa", {
   namedExports: { execa: buildExeca() },
 });
 
-const { default: installDependencies } =
-  await import("../../utils/install-dependencies.ts");
+import "../shared-mocks/node:fs-promises.ts";
 
 // ---------------------------------------------------------------------------
+
+const { default: installDependencies } =
+  await import("../../utils/install-dependencies.ts");
 
 void describe("installDependencies", () => {
   beforeEach(() => {

@@ -13,11 +13,15 @@ function getInitialStep(argValues: AppProperties): number {
     } else {
       if (!!argValues.type) {
         if (!!argValues.language) {
-          if (!!argValues.install) {
-            if (argValues.git === undefined) {
+          if (!!argValues.pm) {
+            if (argValues.install === undefined) {
               return 4;
             } else {
-              return 5;
+              if (argValues.git === undefined) {
+                return 5;
+              } else {
+                return 6;
+              }
             }
           } else {
             return 3;
@@ -49,7 +53,7 @@ export default function App({ argValues }: { argValues: AppProperties }) {
     >
       <Header text="@vigi-p/create-ink-app" />
       <StepperSection {...{ argValues, step, setStep }} />
-      <Footer isFirst={step === 0} isLast={step === 5} />
+      <Footer isFirst={step === 0} isLast={step === 6} />
     </Box>
   );
 }

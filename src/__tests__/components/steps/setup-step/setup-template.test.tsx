@@ -1,53 +1,16 @@
 import assert from "node:assert/strict";
-import { describe, it, mock } from "node:test";
-import { Text } from "ink";
+import { describe, it } from "node:test";
 import { render } from "ink-testing-library";
 
 // ---------------------------------------------------------------------------
 // Mocks
 // ---------------------------------------------------------------------------
 
-mock.module("ink-task-list", {
-  namedExports: {
-    Task: ({
-      label,
-      state,
-    }: {
-      label: string;
-      state: string;
-      spinner?: unknown;
-    }) => <Text>{`${label} [${state}]`}</Text>,
-  },
-});
-
-mock.module("cli-spinners", {
-  defaultExport: { dots: { interval: 80, frames: ["."] } },
-});
-
-mock.module("make-dir", {
-  namedExports: {
-    makeDirectory: mock.fn(async () => undefined),
-  },
-});
-
-mock.module("cpy", {
-  defaultExport: mock.fn(async () => undefined),
-});
-
-const fakeFiles = new Map<string, string>();
-
-mock.module("node:fs/promises", {
-  namedExports: {
-    readFile: mock.fn(async (p: string) => {
-      const content = fakeFiles.get(p);
-      if (content !== undefined) return content;
-      return JSON.stringify({ name: "template" });
-    }),
-    writeFile: mock.fn(async (p: string, data: string) => {
-      fakeFiles.set(p, data);
-    }),
-  },
-});
+import "../../../shared-mocks/ink-task-list.tsx";
+import "../../../shared-mocks/cli-spinners.ts";
+import "../../../shared-mocks/make-dir.ts";
+import "../../../shared-mocks/cpy.ts";
+import "../../../shared-mocks/node:fs-promises.ts";
 
 // ---------------------------------------------------------------------------
 
@@ -56,7 +19,8 @@ const defaultProps = {
   type: "cli" as const,
   language: "ts" as const,
   git: true,
-  install: "npm" as const,
+  pm: "npm" as const,
+  install: true as const,
   onFinish: () => {},
   start: false,
 };

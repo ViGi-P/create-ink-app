@@ -1,15 +1,11 @@
 import assert from "node:assert/strict";
-import { describe, it, mock } from "node:test";
+import { describe, it } from "node:test";
 
 // ---------------------------------------------------------------------------
 // Mocks
 // ---------------------------------------------------------------------------
 
-mock.module("execa", {
-  namedExports: {
-    execa: mock.fn(() => Promise.resolve({ stdout: "", stderr: "" })),
-  },
-});
+import "../shared-mocks/execa.ts";
 
 // ---------------------------------------------------------------------------
 

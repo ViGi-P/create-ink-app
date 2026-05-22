@@ -28,12 +28,13 @@ npx @vigi-p/create-ink-app my-new-app
 
 You can skip the interactive prompts by providing flags directly:
 
-| Flag         | Description          | Values                               |
-| :----------- | :------------------- | :----------------------------------- |
-| `--type`     | Project architecture | `cli`, `library`                     |
-| `--language` | Language choice      | `js`, `ts`                           |
-| `--install`  | Package manager      | `npm`, `yarn`, `pnpm`, `skip`        |
-| `--git`      | Init git repo        | `true` (default), `--no-git` to skip |
+| Flag         | Description          | Values                                   |
+| :----------- | :------------------- | :--------------------------------------- |
+| `--type`     | Project architecture | `cli`, `library`                         |
+| `--language` | Language choice      | `js`, `ts`                               |
+| `--pm`       | Package manager      | `npm`, `yarn`, `pnpm`, `bun`             |
+| `--install`  | Install dependencies | `true` (default), `--no-install` to skip |
+| `--git`      | Init git repo        | `true` (default), `--no-git` to skip     |
 
 ### Examples
 
@@ -43,16 +44,16 @@ You can skip the interactive prompts by providing flags directly:
 npx @vigi-p/create-ink-app
 ```
 
-**Automated setup for a TypeScript CLI using pnpm:**
+**Automated setup for a TypeScript CLI with pnpm:**
 
 ```sh
-npx @vigi-p/create-ink-app my-cli --type cli --language ts --install pnpm --git
+npx @vigi-p/create-ink-app my-cli --type cli --language ts --pm pnpm --install --git
 ```
 
-**Minimalist setup for a JavaScript library:**
+**Minimalist setup for a JavaScript library with bun:**
 
 ```sh
-npx @vigi-p/create-ink-app my-lib --type library --language js --install skip --no-git
+npx @vigi-p/create-ink-app my-lib --type=library --language=js --pm=bun --no-git --no-install
 ```
 
 ## 🛠 Manual Installation

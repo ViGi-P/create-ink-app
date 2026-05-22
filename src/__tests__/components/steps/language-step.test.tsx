@@ -1,40 +1,13 @@
 import assert from "node:assert/strict";
-import { describe, it, mock } from "node:test";
-import React from "react";
-import { Box, Text } from "ink";
+import { describe, it } from "node:test";
 import { render } from "ink-testing-library";
 
 // ---------------------------------------------------------------------------
 // Mocks
 // ---------------------------------------------------------------------------
 
-mock.module("ink-stepper", {
-  namedExports: {
-    Step: ({
-      children,
-    }: {
-      children: React.ReactNode;
-      name: string;
-      canProceed?: boolean;
-    }) => <>{children}</>,
-  },
-});
-
-mock.module("ink-select-input", {
-  defaultExport: ({
-    items,
-  }: {
-    items: { value: unknown; label: string }[];
-    initialIndex?: number;
-    onSelect: (item: { value: unknown; label: string }) => void;
-  }) => (
-    <Box flexDirection="column">
-      {items.map((item, i) => (
-        <Text key={i}>{item.label}</Text>
-      ))}
-    </Box>
-  ),
-});
+import "../../shared-mocks/ink-stepper.tsx";
+import "../../shared-mocks/ink-select-input.tsx";
 
 // ---------------------------------------------------------------------------
 

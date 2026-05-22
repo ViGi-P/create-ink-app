@@ -6,25 +6,25 @@ const items = [
   { value: "npm", label: "NPM" },
   { value: "yarn", label: "Yarn" },
   { value: "pnpm", label: "PNPM" },
-  { value: "skip", label: "Skip" },
+  { value: "bun", label: "Bun" },
 ];
 
-export default function InstallStep({
+export default function PMStep({
   onChange,
-  install = "npm",
+  pm = "npm",
 }: {
-  onChange: (name: "npm" | "yarn" | "pnpm" | "skip") => void;
-  install?: "npm" | "yarn" | "pnpm" | "skip";
+  onChange: (name: "npm" | "yarn" | "pnpm" | "bun") => void;
+  pm?: "npm" | "yarn" | "pnpm" | "bun";
 }) {
   return (
-    <Step name="Install" canProceed={!!install}>
+    <Step name="PM" canProceed={!!pm}>
       <Box flexDirection="column">
-        <Text bold>Install dependencies?</Text>
+        <Text bold>Which package manager do you want to use?</Text>
         <SelectInput
           items={items}
-          initialIndex={items.findIndex((i) => i.value === install)}
+          initialIndex={items.findIndex((i) => i.value === pm)}
           onSelect={({ value }) =>
-            onChange(value as "npm" | "yarn" | "pnpm" | "skip")
+            onChange(value as "npm" | "yarn" | "pnpm" | "bun")
           }
         />
       </Box>

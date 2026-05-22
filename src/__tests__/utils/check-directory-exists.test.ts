@@ -1,16 +1,11 @@
 import assert from "node:assert/strict";
-import { describe, it, mock } from "node:test";
+import { describe, it } from "node:test";
 
 // ---------------------------------------------------------------------------
 // Mocks
 // ---------------------------------------------------------------------------
 
-mock.module("node:fs", {
-  namedExports: {
-    // Stub: return true for paths containing "existing", false otherwise.
-    existsSync: mock.fn((p: string) => p.includes("existing")),
-  },
-});
+import "../shared-mocks/node:fs.ts";
 
 // ---------------------------------------------------------------------------
 

@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { render } from "ink-testing-library";
 import { Router } from "@endernoke/wax";
-import EscapeKey from "../../components/escape-key.tsx";
+import EscapeKey from "../../../components/escape-key.tsx";
 
 const renderEscapeKey = (initialHistory = ["/"]) =>
   render(

@@ -1,25 +1,11 @@
 import assert from "node:assert/strict";
-import { describe, it, mock } from "node:test";
+import { describe, it } from "node:test";
 
 // ---------------------------------------------------------------------------
 // Mocks
 // ---------------------------------------------------------------------------
 
-// In-memory package.json stored per path.
-const fakeFiles = new Map<string, string>();
-
-mock.module("node:fs/promises", {
-  namedExports: {
-    readFile: mock.fn(async (p: string) => {
-      const content = fakeFiles.get(p);
-      if (content === undefined) throw new Error(`File not found: ${p}`);
-      return content;
-    }),
-    writeFile: mock.fn(async (p: string, data: string) => {
-      fakeFiles.set(p, data);
-    }),
-  },
-});
+import { fakeFiles } from "../shared-mocks/node:fs-promises.ts";
 
 // ---------------------------------------------------------------------------
 
@@ -35,7 +21,7 @@ void describe("updatePackageJSON", () => {
       JSON.stringify({ name: "old-name", version: "1.0.0" }),
     );
 
-    await updatePackageJSON(projectPath, "new-name");
+    await updatePackageJSON(projectPath, "new-name", "npm");
 
     const updated = JSON.parse(fakeFiles.get(pkgPath) ?? "{}") as {
       name: string;
@@ -55,7 +41,7 @@ void describe("updatePackageJSON", () => {
       }),
     );
 
-    await updatePackageJSON(projectPath, "preserved");
+    await updatePackageJSON(projectPath, "preserved", "npm");
 
     const updated = JSON.parse(fakeFiles.get(pkgPath) ?? "{}") as {
       name: string;
@@ -72,7 +58,7 @@ void describe("updatePackageJSON", () => {
     const pkgPath = `${projectPath}/package.json`;
     fakeFiles.set(pkgPath, JSON.stringify({ name: "x" }));
 
-    await updatePackageJSON(projectPath, "y");
+    await updatePackageJSON(projectPath, "y", "npm");
 
     const raw = fakeFiles.get(pkgPath) ?? "";
     assert.ok(raw.endsWith("\n"), "file should end with a newline");
