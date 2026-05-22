@@ -38,25 +38,28 @@ mock.module("ink-select-input", {
 
 // ---------------------------------------------------------------------------
 
-const { default: InstallStep } =
-  (await import("../../../components/stepper-section/steps/install-step.tsx")) as unknown as {
-    default: typeof import("../../../components/stepper-section/steps/install-step.tsx").default;
+const { default: PMStep } =
+  (await import("../../../components/stepper-section/steps/pm-step.tsx")) as unknown as {
+    default: typeof import("../../../components/stepper-section/steps/pm-step.tsx").default;
   };
 
-void describe("InstallStep", () => {
-  void it("renders 'Install dependencies?' label", () => {
-    const { lastFrame, unmount } = render(<InstallStep onChange={() => {}} />);
-    assert.match(lastFrame() ?? "", /Install dependencies\?/);
+void describe("PMStep", () => {
+  void it("renders 'Which package manager do you want to use??' label", () => {
+    const { lastFrame, unmount } = render(<PMStep onChange={() => {}} />);
+    assert.match(
+      lastFrame() ?? "",
+      /Which package manager do you want to use?\?/,
+    );
     unmount();
   });
 
   void it("renders all package manager options", () => {
-    const { lastFrame, unmount } = render(<InstallStep onChange={() => {}} />);
+    const { lastFrame, unmount } = render(<PMStep onChange={() => {}} />);
     const frame = lastFrame() ?? "";
     assert.match(frame, /NPM/);
     assert.match(frame, /Yarn/);
     assert.match(frame, /PNPM/);
-    assert.match(frame, /Skip/);
+    assert.match(frame, /Bun/);
     unmount();
   });
 });

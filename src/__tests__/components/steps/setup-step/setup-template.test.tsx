@@ -56,7 +56,8 @@ const defaultProps = {
   type: "cli" as const,
   language: "ts" as const,
   git: true,
-  install: "npm" as const,
+  pm: "npm" as const,
+  install: true as const,
   onFinish: () => {},
   start: false,
 };

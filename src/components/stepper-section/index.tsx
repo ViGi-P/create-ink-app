@@ -5,7 +5,8 @@ import StepperProgress from "./stepper-progress.tsx";
 import NameStep from "./steps/name-step.tsx";
 import TypeStep from "./steps/type-step.tsx";
 import LanguageStep from "./steps/language-step.tsx";
-import InstallStep from "./steps/install-step.tsx";
+import PMStep from "./steps/pm-step.tsx";
+import InstallDepsStep from "./steps/install-deps-step.tsx";
 import GitStep from "./steps/git-step.tsx";
 import SetupStep from "./steps/setup-step/index.tsx";
 import type { AppProperties } from "../../types/app-properties.type.ts";
@@ -45,7 +46,11 @@ export default function StepperSection(props: {
           onChange={(language) => setValues({ ...values, language: language })}
           language={values.language}
         />
-        <InstallStep
+        <PMStep
+          onChange={(pm) => setValues({ ...values, pm: pm })}
+          pm={values.pm}
+        />
+        <InstallDepsStep
           onChange={(install) => setValues({ ...values, install: install })}
           install={values.install}
         />
@@ -54,7 +59,7 @@ export default function StepperSection(props: {
           git={values.git}
         />
         <SetupStep
-          current={props.step === 5}
+          current={props.step === 6}
           values={values as Required<AppProperties>}
         />
       </Stepper>

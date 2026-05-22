@@ -4,17 +4,19 @@ import { fileURLToPath } from "node:url";
 import type { AppProperties } from "../types/app-properties.type.ts";
 
 export default async function copyTemplate(
+  pm: AppProperties["pm"] & string,
   type: AppProperties["type"] & string,
   language: AppProperties["language"] & string,
   projectPath: string,
   setProgress: (percent: number) => void,
 ): Promise<void> {
+  const runtime = pm === "bun" ? "bun" : "node";
   const templatePath = path.join(
     path.resolve(
       path.dirname(fileURLToPath(import.meta.url)),
       "../../templates",
     ),
-    `${type}-${language}`,
+    `${runtime}-${type}-${language}`,
   );
 
   await cpy("**/*", projectPath, {

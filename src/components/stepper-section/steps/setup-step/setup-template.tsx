@@ -18,7 +18,7 @@ export default function SetupTemplate(
     "loading" | "pending" | "success" | "error"
   >("loading");
   const [output, setOutput] = useState<string[]>(["Creating directory"]);
-  const { start, type, language, projectName, onFinish } = props;
+  const { start, type, language, pm, projectName, onFinish } = props;
 
   useEffect(() => {
     async function run() {
@@ -26,7 +26,7 @@ export default function SetupTemplate(
         const projectPath = path.resolve(projectName);
         await makeDirectory(projectPath);
         setOutput((prev) => [...prev, "Copying files"]);
-        await copyTemplate(type, language, projectPath, (progress) =>
+        await copyTemplate(pm, type, language, projectPath, (progress) =>
           setOutput((prev) => [
             ...prev.slice(0, -1),
             `${prev[prev.length - 1]}...(${progress}%)`,

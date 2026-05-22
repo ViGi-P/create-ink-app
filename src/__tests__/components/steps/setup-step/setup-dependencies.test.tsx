@@ -28,7 +28,8 @@ mock.module("cli-spinners", {
 
 const defaultProps = {
   projectName: "test-two",
-  install: "skip" as const,
+  pm: "npm" as const,
+  install: false as const,
   language: "ts" as const,
   onFinish: () => {},
   scrollDown: () => {},

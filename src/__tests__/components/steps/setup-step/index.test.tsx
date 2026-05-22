@@ -89,7 +89,8 @@ const baseValues = {
   projectName: "test-one",
   type: "cli" as const,
   language: "ts" as const,
-  install: "skip" as const,
+  pm: "npm" as const,
+  install: false as const,
   git: true,
 };
 

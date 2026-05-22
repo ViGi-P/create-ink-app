@@ -24,7 +24,7 @@ const { default: copyTemplate } = await import("../../utils/copy-template.ts");
 void describe("copyTemplate", () => {
   void it("calls the progress callback with rounded percentages", async () => {
     capturedProgress = [];
-    await copyTemplate("cli", "ts", "/tmp/dest", (pct) => {
+    await copyTemplate("npm", "cli", "ts", "/tmp/dest", (pct) => {
       capturedProgress.push(pct);
     });
 
@@ -40,7 +40,7 @@ void describe("copyTemplate", () => {
     ];
     for (const [type, language] of combinations) {
       await assert.doesNotReject(() =>
-        copyTemplate(type, language, "/tmp/dest", () => {}),
+        copyTemplate("npm", type, language, "/tmp/dest", () => {}),
       );
     }
   });

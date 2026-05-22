@@ -194,7 +194,8 @@ void describe("App", () => {
           projectName: "test-app",
           type: "cli",
           language: "ts",
-          install: "npm",
+          pm: "npm",
+          install: true,
         }}
       />,
     );
@@ -210,7 +211,8 @@ void describe("App", () => {
           projectName: "src",
           type: "cli",
           language: "ts",
-          install: "npm",
+          pm: "npm",
+          install: true,
         }}
       />,
     );
@@ -226,7 +228,8 @@ void describe("App", () => {
           projectName: "test-app",
           type: "cli",
           language: "ts",
-          install: "npm",
+          pm: "npm",
+          install: true,
           git: true,
         }}
       />,

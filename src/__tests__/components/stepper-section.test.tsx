@@ -116,7 +116,8 @@ const defaultArgValues = {
   projectName: "test-app",
   type: "cli" as const,
   language: "ts" as const,
-  install: "npm" as const,
+  pm: "npm" as const,
+  install: true as const,
   git: true,
 };
 
