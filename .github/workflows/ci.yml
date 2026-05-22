@@ -28,10 +28,10 @@ jobs:
       fail-fast: false
       matrix:
         template:
-          - node-library-js
-          - node-library-ts
-          - node-cli-js
-          - node-cli-ts
+          - library-js
+          - library-ts
+          - cli-js
+          - cli-ts
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -55,10 +55,10 @@ jobs:
       fail-fast: false
       matrix:
         template:
-          - bun-library-js
-          - bun-library-ts
-          - bun-cli-js
-          - bun-cli-ts
+          - library-js
+          - library-ts
+          - cli-js
+          - cli-ts
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
@@ -68,7 +68,5 @@ jobs:
         working-directory: templates/${{ matrix.template }}
       - run: bun add -D @types/bun@latest
         working-directory: templates/${{ matrix.template }}
-      - run: bun run lint
-        working-directory: templates/${{ matrix.template }}
-      - run: bun test
+      - run: bun test src/__tests__/bun
         working-directory: templates/${{ matrix.template }}

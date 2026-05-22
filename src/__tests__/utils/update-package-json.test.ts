@@ -35,7 +35,7 @@ void describe("updatePackageJSON", () => {
       JSON.stringify({ name: "old-name", version: "1.0.0" }),
     );
 
-    await updatePackageJSON(projectPath, "new-name");
+    await updatePackageJSON(projectPath, "new-name", "npm");
 
     const updated = JSON.parse(fakeFiles.get(pkgPath) ?? "{}") as {
       name: string;
@@ -55,7 +55,7 @@ void describe("updatePackageJSON", () => {
       }),
     );
 
-    await updatePackageJSON(projectPath, "preserved");
+    await updatePackageJSON(projectPath, "preserved", "npm");
 
     const updated = JSON.parse(fakeFiles.get(pkgPath) ?? "{}") as {
       name: string;
@@ -72,7 +72,7 @@ void describe("updatePackageJSON", () => {
     const pkgPath = `${projectPath}/package.json`;
     fakeFiles.set(pkgPath, JSON.stringify({ name: "x" }));
 
-    await updatePackageJSON(projectPath, "y");
+    await updatePackageJSON(projectPath, "y", "npm");
 
     const raw = fakeFiles.get(pkgPath) ?? "";
     assert.ok(raw.endsWith("\n"), "file should end with a newline");

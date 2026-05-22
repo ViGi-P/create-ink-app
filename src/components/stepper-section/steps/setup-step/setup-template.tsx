@@ -33,7 +33,7 @@ export default function SetupTemplate(
           ]),
         );
         setOutput((prev) => [...prev, "Updating package.json"]);
-        await updatePackageJSON(projectPath, projectName);
+        await updatePackageJSON(projectPath, projectName, pm);
         setOutput((prev) => [...prev, "Done"]);
         setState(() => "success");
       } catch (err) {

@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+
 import { describe, it, mock } from "node:test";
 
 // ---------------------------------------------------------------------------
@@ -8,6 +9,15 @@ import { describe, it, mock } from "node:test";
 // Track calls to the progress callback.
 let capturedProgress: number[] = [];
 
+mock.module("node:fs/promises", {
+  namedExports: {
+    rm: mock.fn(async () => {}),
+    rename: mock.fn(async () => {}),
+    readdir: mock.fn(async () => {
+      return ["test.ts"];
+    }),
+  },
+});
 mock.module("cpy", {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   defaultExport: mock.fn(async (_src: unknown, _dest: unknown, opts: any) => {
