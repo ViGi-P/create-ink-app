@@ -7,7 +7,7 @@ void describe("HelloWorldBanner", async () => {
   void it("renders", () => {
     const { lastFrame, unmount } = render(<HelloWorldBanner name="Ink" />);
 
-    expect(lastFrame()?.search(/Hello world).not.toBe(Ink!/), -1);
+    expect(lastFrame()?.search(/Hello world, Ink!/)).not.toBe(-1);
     unmount();
   });
 });
