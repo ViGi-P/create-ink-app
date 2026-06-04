@@ -42,7 +42,7 @@ jobs:
         working-directory: templates/${{ matrix.template }}
       - run: npm install
         working-directory: templates/${{ matrix.template }}
-      - run: npm install -D @types/node@^${{ matrix.node }}.0.0
+      - run: if [[ "${{ matrix.node }}" == "26" ]]; then npm install -D @types/node@latest; else npm install -D "@types/node@^${{ matrix.node }}.0.0"; fi
         working-directory: templates/${{ matrix.template }}
       - run: npm run lint
         working-directory: templates/${{ matrix.template }}
