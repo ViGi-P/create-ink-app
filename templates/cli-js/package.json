@@ -10,7 +10,7 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "pretest": "babel --out-dir=dist src",
-    "test": "node --test \"dist/__tests__/node/**/*.test.js\""
+    "test": "node --test \"dist/__tests__/node/\""
   },
   "dependencies": {
     "@endernoke/wax": "^1.0.0",
