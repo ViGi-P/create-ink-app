@@ -38,18 +38,15 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 11.0.9
       - run: rm -rf ./src/__tests__/bun
         working-directory: templates/${{ matrix.template }}
-      - run: pnpm install
+      - run: npm install
         working-directory: templates/${{ matrix.template }}
-      - run: pnpm add -D @types/node@^${{ matrix.node }}.0.0
+      - run: npm install -D @types/node@^${{ matrix.node }}.0.0
         working-directory: templates/${{ matrix.template }}
-      - run: pnpm lint
+      - run: npm run lint
         working-directory: templates/${{ matrix.template }}
-      - run: pnpm test
+      - run: npm test
         working-directory: templates/${{ matrix.template }}
 
   bun-templates:
